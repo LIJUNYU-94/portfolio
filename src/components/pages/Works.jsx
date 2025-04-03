@@ -155,7 +155,7 @@ function Works() {
       details: [
         { img: "1.jpeg", imgintro: "1" },
         { img: "1.jpeg", imgintro: "2" },
-        { img: "1.jpeg", imgintro: "3" },
+        { img: "1.jpeg", imgintro: "4" },
       ],
       name: "ポートフォリオサイト",
       intro:
