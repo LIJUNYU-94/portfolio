@@ -114,7 +114,7 @@ function Works() {
       url: "https://lijunyu-94.github.io/brickgame/",
       details: [
         {
-          img: "3kv.png",
+          img: "3a.png",
           imgintro:
             "ゲームの画面です、UIデザインまだはスマホ対応、そしてバックエンドでのランキング表示はブラッシュアップ予定です。",
         },

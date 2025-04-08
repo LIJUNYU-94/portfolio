@@ -322,7 +322,6 @@ h1 {
 }
 .exp-right-detail p {
   width: fit-content;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
   padding: 5px 0;
