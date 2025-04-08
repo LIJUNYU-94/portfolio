@@ -84,6 +84,8 @@ main {
   height: max(20vh, 150px);
   border-radius: 200px;
   margin-bottom: 4vh;
+  object-fit: cover;
+  object-position: center;
 }
 .lefttop-name {
   padding-bottom: 3px;
@@ -131,7 +133,7 @@ main {
   height: 85vh;
 }
 section {
-  height: 100%;
+  height: 85vh;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 20px;
@@ -153,15 +155,20 @@ h1 {
   height: 120px;
   margin: 20px auto;
 }
-.about-messege {
+.about-message {
   margin: 2vh 3% 4vh;
-  letter-spacing: 0.1em;
-  line-height: 1.5;
-  text-indent: 1em;
   overflow-y: scroll;
+  padding: 10px 10px 10px 20px;
+  background-color: #7e7d7d;
+  border-radius: 20px 0px 0px 5px;
+  scrollbar-color: #bda9a9 #f5e3b6;
+  scrollbar-width: thin;
 }
-.about-messege::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+.about-message p {
+  line-height: 1.5;
+  padding-bottom: 16px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.85);
 }
 .about-bottom {
   margin: 0 auto;
@@ -228,17 +235,21 @@ h1 {
 
 .skill-barc {
   border-radius: 2px 0 0 2px;
-  transition: all 1s ease-in-out;
-  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
   position: absolute;
   left: 0;
   height: 23px;
   z-index: 3;
-  background-color: rgba(162, 64, 64, 0.4);
+  background-color: rgb(197, 168, 168);
+  text-indent: 1em;
+  font-size: 14px;
 }
 .skill-barc.loading {
-  transform: translateX(0);
-  background-color: rgb(162, 64, 64);
+  opacity: 0;
+  transform: translateX(-100%);
+  background-color: rgba(162, 64, 64, 0.4);
 }
 .skill-bard {
   border-radius: 2px 0 0 2px;
@@ -262,7 +273,7 @@ h1 {
 }
 .exp-line {
   position: absolute;
-  left: calc(10% + 100px);
+  left: calc(5% + 100px);
   top: 0;
   bottom: 0;
   width: 4px;
@@ -273,15 +284,14 @@ h1 {
   padding: 60px 20px;
 }
 .exp-slide {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 17% 1fr;
   align-items: center;
   opacity: 0;
 }
 .swiper-slide {
   opacity: 0.4;
   transition: all 0.4s ease;
-  height: 300px;
 }
 
 .swiper-slide-active {
@@ -290,17 +300,49 @@ h1 {
 }
 .exp-left {
   margin-left: 6%;
-  text-align: center;
 }
 .exp-left-year {
   font-size: 20px;
   text-align: center;
   width: 80px;
+  margin-left: 5px;
 }
 .swiper-slide-active .exp-left-year {
   font-size: 28px;
 }
 
+.exp-right-ttl {
+  color: #bacaad;
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+.exp-right-detail {
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 30px;
+}
+.exp-right-detail p {
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 5px 0;
+}
+.exp-right-detail p::before {
+  content: "";
+  background-color: white;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.exp-right-detail p:hover:before {
+  transform: translateX(0);
+  opacity: 1;
+}
 /*
   content→worksの部分
 */
@@ -318,12 +360,15 @@ h1 {
 .works-message {
   background-color: rgba(240, 248, 255, 0.4);
   color: #2d3237;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.1em;
   grid-column: 1/5;
   padding: 10px;
-  text-indent: 1em;
   border-radius: 5px;
+}
+.works-message span {
+  font-weight: 500;
+  color: rgba(53, 49, 35, 0.9);
 }
 .works-show {
   aspect-ratio: 16/9;
@@ -456,7 +501,7 @@ h2::before {
 }
 .scroll-active {
   animation: scrollGallery linear infinite;
-  animation-duration: 4s;
+  animation-duration: 20s;
 }
 .works-detail-text-right-imggallery:hover {
   animation-play-state: paused;

@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-function RadarChart({ title, level, labels, color }) {
+function RadarChart({ title, level, labels, color, delay }) {
   const data = {
     labels: labels,
     datasets: [
@@ -38,6 +38,10 @@ function RadarChart({ title, level, labels, color }) {
 
   const options = {
     responsive: true,
+    animation: {
+      delay: delay,
+      duration: 1000,
+    },
     plugins: {
       legend: {
         labels: {
