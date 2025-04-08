@@ -20,7 +20,8 @@ function Works() {
   const [selectedIntro, setSelectedIntro] = useState("");
   const [workNow, setWork] = useState(0);
   const [detailshow, detailshowOn] = useState("off");
-  const [selectedName, setSelectedName] = useState("");
+  const [selectedName, setSelectedName] =
+    useState("マウスホバーで詳細表示します");
   useEffect(() => {
     setWork(0);
   }, []);
