@@ -29,7 +29,7 @@ app.post("/api/contact", async (req, res) => {
       from: email,
       to: process.env.EMAIL_USER,
       subject: `お問い合わせ from ${name}`,
-      text: email + message,
+      text: `メール：${email} 、問い合わせ内容：${message}`,
     });
 
     res.json({ success: true });
