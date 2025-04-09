@@ -552,3 +552,67 @@ h2::before {
   width: 90%;
   margin: 0 auto;
 }
+/*
+**contactページ
+*/
+.contact {
+  grid-template-rows: auto auto 1fr;
+}
+.contact-form {
+  width: 90%;
+  max-width: 800px;
+  display: grid;
+  grid-template-rows: 50px 50px 1fr 50px;
+  margin: 2vh auto 0;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.contact-text {
+  width: 90%;
+  margin: 1vh auto 0;
+}
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-textarea {
+  height: 1fr;
+  resize: vertical;
+}
+
+.form-button {
+  width: 40%;
+  margin-left: 30%;
+  padding: 12px;
+  background-color: #ffbd13;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.form-success {
+  color: green;
+  margin-top: 12px;
+}
+
+.form-error {
+  color: red;
+  margin-top: 12px;
+}
