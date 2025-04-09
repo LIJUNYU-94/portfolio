@@ -13,8 +13,9 @@ app.post("/api/contact", async (req, res) => {
   if (!name || !email || !message) {
     return res.status(400).json({ success: false, error: "全項目必須です" });
   }
+  console.log("🔍 process.env dump:", process.env);
   console.log("🟡 読み込んだGmailアドレス:", process.env.EMAIL_USER);
-  console.log("🟡 パスワード長さ:", process.env.EMAIL_PASS?.length); // ← 16になる？
+  console.log("🟡 パスワード長さ:", process.env.EMAIL_PASS?.length);
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
