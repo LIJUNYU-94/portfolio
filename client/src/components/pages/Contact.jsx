@@ -22,7 +22,7 @@ function Contact() {
       //   body: JSON.stringify(form),
       // });
       const res = await fetch(
-        "https://your-railway-url.up.railway.app/api/contact",
+        "https://portfolio-production-7677.up.railway.app/api/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
