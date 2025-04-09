@@ -16,11 +16,23 @@ function Contact() {
       //   headers: { "Content-Type": "application/json" },
       //   body: JSON.stringify(form),
       // });
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      // const res = await fetch("/api/contact", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(form),
+      // });
+      const res = await fetch(
+        "https://your-railway-url.up.railway.app/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            message: form.message,
+          }),
+        }
+      );
       const result = await res.json();
       console.log("result:", result);
       if (result.success) {
