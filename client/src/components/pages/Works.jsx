@@ -293,9 +293,9 @@ function Works() {
       id: 8,
       kv: "8kv.png",
       description:
-        "「フロントエンドエンジニアとして、ポートフォリオはサイト形式の方が適している」と思いました。まずReact.jsを用いて、1からテンプレートを作り、最後に内容を入力するだけで簡単に仕上がります。テンプレートをご希望の方は、ぜひContactページよりお気軽に連絡してください",
+        "「フロントエンドエンジニアとして、ポートフォリオはサイト形式の方が適している」と思いました。まずReact.jsを用いて、1からテンプレートを作り、最後に内容を入力するだけで簡単に仕上がります。バックエンドの試しでcontactページを実装しました。何が気になるところがあればぜひ気軽にご連絡ください。",
       period: "2025.3(10日間)",
-      skills: "React.js、Chart.js、CSS",
+      skills: "React.js+Express、Chart.js、CSS",
       url: "https://portfolio-three-neon-20.vercel.app/",
       details: [
         {

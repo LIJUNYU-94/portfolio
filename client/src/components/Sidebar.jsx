@@ -5,7 +5,7 @@ function Sidebar({ setPage }) {
     setPage(null);
     setTimeout(() => setPage(target), 1);
   };
-  const [active, activeOn] = useState("about");
+  const [active, activeOn] = useState("works");
   return (
     <div className="sidebar">
       <Sidetop />

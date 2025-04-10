@@ -51,7 +51,7 @@ function Contact() {
     <section className="contact">
       <h1>Contact</h1>
       <p className="contact-text">
-        このサイトを通して、私のことを少しでも知っていただければ嬉しいです。もしこのサイトや私について何かメッセージがありましたら、下記フォームをご利用ください。
+        このサイトを通して、私のことを少しでも知っていただければ嬉しいです。もしこのサイトや私について何か気になることがありましたら、下記フォームをご利用ください。
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>
@@ -89,7 +89,9 @@ function Contact() {
           {status === "sending" ? "送信中..." : "送信"}
         </button>
         {status === "success" && (
-          <p className="form-success">送信されました！</p>
+          <p className="form-success">
+            ありがとうございます！確認でき次第、返信させていただきます
+          </p>
         )}
         {status === "error" && (
           <p className="form-error">送信に失敗しました。</p>
