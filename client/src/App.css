@@ -962,8 +962,8 @@ h2::before {
     flex-direction: column;
     align-items: center;
   }
-  .works-rightsp-slide .swiper {
-    width: 90% !important;
+  .swiper {
+    width: 100% !important;
   }
   .swiper-button {
     top: 30% !important;
@@ -986,7 +986,7 @@ h2::before {
   .works-rightsp-slide img {
     border: 1px solid rgba(0, 86, 179, 0.4);
     height: 55%;
-    width: 100%;
+    width: 90%;
     object-fit: contain;
   }
   .works-rightsp-slide p {
