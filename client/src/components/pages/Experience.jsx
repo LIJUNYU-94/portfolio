@@ -7,7 +7,9 @@ function Experience() {
       <div>
         {" "}
         <p className="exp-intro">
-          せっかくなので今までの私を一緒に振り返りましょう
+          せっかくなので
+          <br className="sp-only" />
+          今までの私を一緒に振り返りましょう
         </p>{" "}
         <ProfileTimeline />
       </div>

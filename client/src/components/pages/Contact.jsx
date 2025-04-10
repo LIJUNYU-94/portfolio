@@ -51,7 +51,12 @@ function Contact() {
     <section className="contact">
       <h1>Contact</h1>
       <p className="contact-text">
-        このサイトを通して、私のことを少しでも知っていただければ嬉しいです。もしこのサイトや私について何か気になることがありましたら、下記フォームをご利用ください。
+        このサイトを通して、 <br className="sp-only" />
+        私のことを少しでも知っていただければ嬉しいです。
+        <br className="sp-only" />{" "}
+        もしこのサイトや私について何か気になることがありましたら、{" "}
+        <br className="sp-only" />
+        下記フォームをご利用ください。
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>

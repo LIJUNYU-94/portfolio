@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Worksdetail from "./Worksdetail";
+import useIsMobile from "../isMobile";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 function Work({ kv, name, onHover, onClick }) {
+  const isMobile = useIsMobile();
   return (
     <div className="works-show">
+      {isMobile ? <p className="works-show-ttl">{name}</p> : <></>}
       <img
         src={kv}
         alt={name}
@@ -20,8 +26,16 @@ function Works() {
   const [selectedIntro, setSelectedIntro] = useState("");
   const [workNow, setWork] = useState(0);
   const [detailshow, detailshowOn] = useState("off");
-  const [selectedName, setSelectedName] =
-    useState("マウスホバーで詳細表示します");
+  const isMobile = useIsMobile();
+  const [selectedName, setSelectedName] = useState(
+    <>
+      この1年間で制作した作品です。
+      <br />
+      初心者から少しずつ成長してきた過程が伝わるように構成しています。ご覧いただけましたら嬉しいです。
+      <br />
+      マウスホバーでここに詳細が表示されます。
+    </>
+  );
   useEffect(() => {
     setWork(0);
   }, []);
@@ -345,15 +359,87 @@ function Works() {
       "-=0.2"
     );
   };
+  useEffect(() => {
+    if (isMobile) {
+      const targets = gsap.utils.toArray(".works-show");
+      console.log("見つかった要素数:", targets.length);
+      targets.forEach((target) => {
+        ScrollTrigger.create({
+          trigger: target,
+          start: "top 60%",
+          end: "bottom 30%",
+          onEnter: () => {
+            gsap.to(target, {
+              scale: 1.1,
+              opacity: 1,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+          onEnterBack: () => {
+            gsap.to(target, {
+              scale: 1.1,
+              opacity: 1,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+          onLeave: () => {
+            gsap.to(target, {
+              scale: 1,
+              opacity: 0.5,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(target, {
+              scale: 1,
+              opacity: 0.5,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          },
+        });
+      });
+
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    }
+  }, [isMobile]);
+  useEffect(() => {
+    if (isMobile && detailshow === "on") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [detailshow, isMobile]);
   return (
     <>
       <section className="works">
         <h1>Works</h1>
         <div className="works-container">
-          <p className="works-message">
-            <span>「{selectedName}」 </span> <br />
-            {selectedIntro}
-          </p>
+          {isMobile ? (
+            <p className="works-messagesp">
+              この1年間で制作した作品です。
+              <br />
+              初心者から少しずつ成長してきた過程が伝わるように構成しています。
+              <br />
+              ご覧いただけましたら嬉しいです。
+              <br />
+            </p>
+          ) : (
+            <p className="works-message">
+              <span>{selectedName} </span> <br />
+              {selectedIntro}
+            </p>
+          )}
+
           {worksData.map((item, index) => (
             <Work
               key={index}
@@ -438,6 +524,7 @@ function Works() {
               <div className="works-detail-text" ref={textRef}>
                 <Worksdetail now={worksData[workNow - 1]} />
               </div>
+
               <p
                 ref={closeBtnRef}
                 className="works-detail-off"

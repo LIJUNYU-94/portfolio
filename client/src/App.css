@@ -6,6 +6,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+.sp-only {
+  display: none;
+}
+.pc-only {
+  display: block;
+}
+
 .opening {
   display: flex;
   flex-direction: column;
@@ -56,6 +63,28 @@
     opacity: 1;
   }
 }
+@keyframes expjump {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.1);
+  }
+  50% {
+    transform: translateY(10px) scale(1);
+  }
+}
+@keyframes btnjump {
+  0% {
+    transform: translateY(0) scale(1) rotateY(0deg);
+  }
+
+  50% {
+    transform: translateY(10px) scale(1.05) rotateY(180deg);
+  }
+
+  100% {
+    transform: translateY(0) scale(1) rotateY(360deg);
+  }
+}
 body {
   background: linear-gradient(135deg, #2c3e50, #4b6584);
   background-size: 400% 400%;
@@ -76,7 +105,7 @@ body {
   }
 }
 
-@media screen and (min-height: 700px) {
+@media screen and (min-height: 700px) and (min-width: 500px) {
   body {
     overflow-y: hidden;
     height: 100vh;
@@ -691,4 +720,289 @@ h2::before {
 .form-error {
   color: red;
   margin-top: 12px;
+}
+
+/*
+----------------------レスポンシブ部分です------------------------
+*/
+
+@media screen and (max-width: 500px) {
+  .sp-only {
+    display: block;
+  }
+  .pc-only {
+    display: none;
+  }
+  body {
+    width: 100%;
+  }
+  p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  main {
+    display: block;
+    height: auto;
+  }
+  .sidebar {
+    height: 85vh;
+    transition: transform 0.3s ease-in;
+    transform-origin: center;
+    border-right: none;
+  }
+  .leftmid li {
+    margin: 7vh 0 7vh 40%;
+  }
+  .leftbottom {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  /***
+  contentの部分
+***/
+  .content {
+    transition: transform 0.3s ease-in;
+    transform-origin: left;
+    height: auto;
+  }
+  section {
+    height: auto;
+    display: block;
+  }
+  .spheader {
+    width: 100%;
+    height: 7vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+  .spmenu {
+    scale: 1.5;
+    position: absolute;
+    top: 2.5vh;
+    left: 2.5vh;
+  }
+  .spheader p {
+    letter-spacing: 0.1em;
+    color: white;
+  }
+  .spfooter {
+    height: 100px;
+    width: 100%;
+    position: relative;
+    top: 5px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .spfooter-topbtn {
+    font-size: 40px;
+    position: relative;
+    z-index: 2;
+    margin-top: 25px;
+    animation: btnjump 2s infinite;
+  }
+
+  .spfooter-shape {
+    width: 130%;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #758190;
+    border-radius: 800px;
+  }
+  /*
+  content→aboutの部分
+*/
+  .about-message {
+    background-color: inherit;
+    text-indent: 1em;
+  }
+  .about-message p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  /*
+  content→skillsの部分
+*/
+  .skills-message {
+    margin: 30px auto;
+    text-indent: 1em;
+  }
+  .skills-Radars {
+    margin: 0 auto 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .skills-langttl {
+    margin-left: 5%;
+  }
+  .skills-language {
+    margin: 10px 2% 30px;
+  }
+
+  .skill-barb {
+    font-size: 14px;
+    width: calc(100% - 100px);
+  }
+  .skill-barc {
+    font-size: 10px;
+    display: flex;
+    align-items: center; /* 縦方向センター */
+  }
+  /*
+  content-expの部分
+  */
+  .exp-intro {
+    margin: 7vh auto;
+    width: 80%;
+    text-align: center;
+  }
+  .exp-tl {
+    height: auto;
+  }
+  .exp-slide {
+    opacity: 1;
+    grid-template-columns: 27% 1fr;
+    padding: 50px 0 80px;
+    transition: all 0.4s ease;
+  }
+  .exp-slide:last-of-type {
+    padding: 50px 0 50px;
+  }
+  .exp-line {
+    left: calc(2.5% + 80px);
+    margin-bottom: 40px;
+  }
+  .exp-right-ttl {
+    font-size: 16px;
+  }
+  .exp-jump {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    top: -7vh;
+    animation: expjump 1.5s ease-in-out infinite;
+  }
+  /*
+  content→worksの部分
+*/
+  .works-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10vh;
+  }
+  .works-show {
+    opacity: 0.5;
+    transform: scale(1);
+    transition: all 0.3s ease;
+  }
+  .works-messagesp {
+    line-height: 3em;
+    margin: 2vh 0;
+    padding: 20px;
+    border: 2px double rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+  }
+  .works-show-ttl {
+    padding: 0 0 10px 0;
+    text-align: center;
+  }
+  .works-detail {
+    position: fixed;
+    left: 5%;
+    width: 90%;
+    height: 90vh;
+    top: 9vh;
+    overflow: scroll;
+  }
+  .works-detail-off {
+    right: 15px;
+    top: 15px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  .works-detail-text {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .works-detail-text p {
+    color: black;
+  }
+  .works-detail-text-left {
+    height: auto;
+  }
+  .works-detail-text-right {
+    padding: 0;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .works-detail-text-leftbottom {
+    position: static;
+  }
+  .works-rightsp-slide {
+    height: 300px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .works-rightsp-slide .swiper {
+    width: 90% !important;
+  }
+  .swiper-button {
+    top: 30% !important;
+    color: #0056b3 !important;
+  }
+  .swiper-button::after {
+    font-size: 24px !important;
+    font-weight: 800;
+  }
+
+  .swiper-button-prev {
+    left: 0 !important;
+  }
+  .swiper-button-next {
+    right: 0 !important;
+  }
+  .works-rightsp-slide .swiper-slide {
+    width: 100%;
+  }
+  .works-rightsp-slide img {
+    border: 1px solid rgba(0, 86, 179, 0.4);
+    height: 55%;
+    width: 100%;
+    object-fit: contain;
+  }
+  .works-rightsp-slide p {
+    padding-top: 5px;
+    font-size: 12px;
+  }
+  .contact {
+    height: 80vh;
+  }
+  .contact-text {
+    margin: 3vh auto;
+    line-height: 1.5em;
+    width: 80%;
+  }
+  .contact-form {
+    margin: 5vh auto;
+    height: 45vh;
+  }
 }

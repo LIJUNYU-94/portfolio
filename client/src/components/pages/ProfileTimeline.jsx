@@ -4,11 +4,24 @@ import { Pagination, Mousewheel } from "swiper/modules";
 import { gsap } from "gsap";
 import "swiper/css";
 import "swiper/css/pagination";
+import { motion, AnimatePresence } from "framer-motion";
+import useIsMobile from "../isMobile";
+import { CiSaveDown1 } from "react-icons/ci";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 const x = "文字です";
+
 const timelineData = [
   {
     year: "2013",
-    event: "大学時代（中国・西安交通大学・英語専攻）",
+    event: (
+      <>
+        大学時代
+        <br className="sp-only" />
+        （中国・西安交通大学・英語専攻）
+      </>
+    ),
     details: [
       "英語専攻、TEM8資格を取得。第二外国語はフランス語。",
       "アルバイトオフィスにて1年間学生リーダー務めました。",
@@ -74,11 +87,26 @@ const timelineData = [
 ];
 
 const ProfileTimeline = () => {
+  const isMobile = useIsMobile();
   const slidesRef = useRef([]);
   const swiperRef = useRef(null);
   const shownSlides = useRef(new Set());
-  const [activeIndex, setActiveIndex] = useState(0); // ← 追加！
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isActivated, setIsActivated] = useState(false);
 
+  useEffect(() => {
+    const activate = () => setIsActivated(true);
+
+    window.addEventListener("scroll", activate);
+    window.addEventListener("touchstart", activate);
+    window.addEventListener("click", activate);
+
+    return () => {
+      window.removeEventListener("scroll", activate);
+      window.removeEventListener("touchstart", activate);
+      window.removeEventListener("click", activate);
+    };
+  }, []);
   const animateSlide = (index) => {
     const el = slidesRef.current[index];
     if (!el || shownSlides.current.has(index)) return;
@@ -104,72 +132,162 @@ const ProfileTimeline = () => {
           y: 0,
           duration: 0.6,
           ease: "power2.out",
-          stagger: 0.1, // ← ふわっと一個ずつ出る
+          stagger: 0.1,
           delay: 0.2,
         }
       );
     }
   };
+  const spSlidesRef = useRef([]);
+  const timelineRef = useRef();
 
+  useEffect(() => {
+    if (!isActivated) return;
+    timelineRef.current = gsap.timeline();
+    // 中央棒
+    timelineRef.current.from(".exp-line", {
+      opacity: 0,
+      x: -100,
+      duration: 0.2,
+      ease: "power3.out",
+    });
+
+    // 各スライド
+    spSlidesRef.current.forEach((el, index) => {
+      if (!el) return;
+
+      const year = el.querySelector(".exp-left");
+      const detailLines = el.querySelectorAll(".exp-right-detail p");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: "top 70%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // 中身のアニメーション（順番はそのまま）
+      tl.from(year, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        ease: "power2.out",
+      }).from(detailLines, {
+        opacity: 0,
+        y: -10,
+        x: -40,
+        duration: 0.4,
+        stagger: 0.15,
+        ease: "power2.out",
+      });
+    });
+  }, [isActivated]);
   return (
     <div className="exp-tl">
       {/* 中央縦線 */}
-      <div className="exp-line" />
-
-      <Swiper
-        direction="vertical"
-        slidesPerView={2}
-        centeredSlides={true}
-        spaceBetween={30}
-        pagination={{ clickable: true }}
-        mousewheel
-        modules={[Pagination, Mousewheel]}
-        onSwiper={(swiper) => {
-          // 初期表示のスライドにアニメーション
-          setActiveIndex(swiper.activeIndex); // ← 最初のindexをセット！
-          requestAnimationFrame(() => {
-            animateSlide(swiper.activeIndex);
-          });
-        }}
-        onSlideChangeTransitionEnd={(swiper) => {
-          // スライド切り替え後にアニメーション
-          animateSlide(swiper.activeIndex);
-          setActiveIndex(swiper.activeIndex); // ← スライド変更時に更新
-        }}
-        className="mySwiper"
-      >
-        {timelineData.map((item, index) => (
-          <SwiperSlide key={index}>
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={isActivated ? { opacity: 1, x: 0 } : {}}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="exp-line"
+      />
+      <AnimatePresence>
+        {!isActivated && (
+          <motion.p
+            className="exp-jump sp-only"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <CiSaveDown1 />
+          </motion.p>
+        )}
+      </AnimatePresence>
+      {isMobile ? (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isActivated ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="exp-list"
+        >
+          {timelineData.map((item, index) => (
             <div
-              ref={(el) => (slidesRef.current[index] = el)}
-              className={`slide-wrapper exp-slide ${
-                swiperRef?.current?.activeIndex === index
-                  ? "active"
-                  : "inactive"
-              }`}
+              key={index}
+              ref={(el) => (spSlidesRef.current[index] = el)}
+              className="exp-slide"
             >
-              {/* 左：年 */}
               <div className="exp-left">
                 <p className="exp-left-year">{item.year + "~"}</p>
               </div>
-
-              {/* 右：出来事 */}
               <div className="exp-right">
-                {activeIndex === index ? (
-                  <>
-                    <p className="exp-right-ttl">{item.event}</p>
-                    <div className="exp-right-detail">
-                      {item.details.map((line, i) => (
-                        <p key={i}>{line}</p>
-                      ))}
-                    </div>
-                  </>
-                ) : null}
+                <p className="exp-right-ttl">{item.event}</p>
+                <div className="exp-right-detail">
+                  {item.details.map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
               </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </motion.div>
+      ) : (
+        <Swiper
+          direction="vertical"
+          slidesPerView={2}
+          centeredSlides={true}
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          mousewheel
+          modules={[Pagination, Mousewheel]}
+          onSwiper={(swiper) => {
+            // 初期表示のスライドにアニメーション
+            setActiveIndex(swiper.activeIndex); // ← 最初のindexをセット！
+            requestAnimationFrame(() => {
+              animateSlide(swiper.activeIndex);
+            });
+          }}
+          onSlideChangeTransitionEnd={(swiper) => {
+            // スライド切り替え後にアニメーション
+            animateSlide(swiper.activeIndex);
+            setActiveIndex(swiper.activeIndex); // ← スライド変更時に更新
+          }}
+          className="mySwiper"
+        >
+          {timelineData.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div
+                ref={(el) => (slidesRef.current[index] = el)}
+                className={`slide-wrapper exp-slide ${
+                  swiperRef?.current?.activeIndex === index
+                    ? "active"
+                    : "inactive"
+                }`}
+              >
+                {/* 左：年 */}
+                <div className="exp-left">
+                  <p className="exp-left-year">{item.year + "~"}</p>
+                </div>
+
+                {/* 右：出来事 */}
+                <div className="exp-right">
+                  {activeIndex === index ? (
+                    <>
+                      <p className="exp-right-ttl">{item.event}</p>
+                      <div className="exp-right-detail">
+                        {item.details.map((line, i) => (
+                          <p key={i}>{line}</p>
+                        ))}
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 };

@@ -1,5 +1,12 @@
 import React from "react";
+import { motion } from "framer-motion";
+import useIsMobile from "../isMobile";
 function About() {
+  const isMobile = useIsMobile();
+  const motionProps = isMobile
+    ? { whileInView: { opacity: 1, x: 0 } }
+    : { animate: { opacity: 1, x: 0 } };
+
   const intro = [
     "30代を迎える直前で、「人生の道を考え直すのもありかもしれない」と悩んでいました。",
     "高校時代からずっと文系で、語学や歴史が好きだったものの、「何かが違う」という違和感がありました。改めて考えてみると、「歴史が好き」というのは、必ずしも「歴史研究が好き」ということではなかったし、語学も、ただ言語力を活かして働くことに魅力を感じていたわけではありませんでした。",
@@ -18,10 +25,16 @@ function About() {
         {intro.map((para, i) => (
           <p key={i}>
             {para.split(/(?<=[。])/).map((line, j) => (
-              <React.Fragment key={j}>
+              <motion.span
+                key={j}
+                initial={{ opacity: 0, x: -30 }}
+                {...motionProps}
+                transition={{ delay: j * 0.2 + i * 0.5, duration: 0.3 }}
+                viewport={{ once: true, amount: 1 }}
+              >
                 {line}
                 <br />
-              </React.Fragment>
+              </motion.span>
             ))}
           </p>
         ))}

@@ -1,11 +1,19 @@
 import Sidetop from "./Sidetop";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useIsMobile from "./isMobile";
 function Sidebar({ setPage }) {
+  const isMobile = useIsMobile();
+  const [active, activeOn] = useState(() => (isMobile ? "" : "works"));
+  useEffect(() => {
+    if (isMobile && active !== "") {
+      activeOn(""); // モバイルだったらページをリセットする
+    }
+  }, [isMobile]);
   const handleClick = (target) => {
     setPage(null);
     setTimeout(() => setPage(target), 1);
   };
-  const [active, activeOn] = useState("works");
+
   return (
     <div className="sidebar">
       <Sidetop />
