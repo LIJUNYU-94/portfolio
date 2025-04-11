@@ -805,6 +805,7 @@ h2::before {
     top: 5px;
     overflow: hidden;
     text-align: center;
+    z-index: -1;
   }
   .spfooter-topbtn {
     font-size: 40px;
@@ -949,6 +950,7 @@ h2::before {
   }
   .works-detail-text-left {
     height: auto;
+    margin-bottom: 3dvh;
   }
   .works-detail-text-right {
     padding: 0;
@@ -961,6 +963,9 @@ h2::before {
   }
   .works-detail-text-leftbottom {
     position: static;
+  }
+  .works-detail-link {
+    margin-bottom: 5dvh;
   }
   .works-rightsp-slide {
     height: 300px;
@@ -998,7 +1003,7 @@ h2::before {
     object-fit: contain;
   }
   .works-rightsp-slide p {
-    padding-top: 5px;
+    padding-top: 2dvh;
     font-size: 12px;
   }
   .contact {
@@ -1022,6 +1027,17 @@ h2::before {
     }
     .works-container {
       margin-bottom: 20dvh;
+    }
+    .works-detail {
+      height: 85dvh;
+    }
+    .contact {
+      height: 100dvh;
+      margin-bottom: 5dvh;
+    }
+    .contact-form {
+      margin: 5vh auto;
+      height: 50vh;
     }
   }
 }
