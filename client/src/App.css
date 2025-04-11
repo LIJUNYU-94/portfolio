@@ -6,6 +6,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  width: 100%;
+}
 .sp-only {
   display: none;
 }
@@ -753,6 +756,7 @@ h2::before {
     transform-origin: center;
     border-right: none;
   }
+
   .leftmid li {
     margin: 4dvh 0 4dvh 40%;
   }
@@ -906,6 +910,8 @@ h2::before {
     opacity: 0.5;
     transform: scale(1);
     transition: all 0.3s ease;
+    width: 85%;
+    margin: 0 auto;
   }
   .works-messagesp {
     line-height: 3em;
@@ -1006,5 +1012,13 @@ h2::before {
   .contact-form {
     margin: 5vh auto;
     height: 45vh;
+  }
+  @media screen and (max-height: 630px) {
+    .lefttop {
+      margin-top: -5dvh;
+    }
+    .works-container {
+      margin-bottom: 20dvh;
+    }
   }
 }
