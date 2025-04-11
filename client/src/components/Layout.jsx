@@ -19,6 +19,8 @@ function Layout() {
   useEffect(() => {
     if (isMobile && page !== "") {
       setPage(""); // モバイルだったらページをリセットする
+    } else {
+      setPage("works");
     }
   }, [isMobile]);
   useEffect(() => {

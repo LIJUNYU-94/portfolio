@@ -1017,6 +1017,9 @@ h2::before {
     .lefttop {
       margin-top: -5dvh;
     }
+    .leftbottom {
+      bottom: 5dvh;
+    }
     .works-container {
       margin-bottom: 20dvh;
     }
