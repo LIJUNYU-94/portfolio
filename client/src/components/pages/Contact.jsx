@@ -11,16 +11,26 @@ function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
-      // const res = await fetch("http://localhost:8000/contact.php", {
+      //***php */
+      // const res = await fetch("http://localhost:8000/src/backend/contact.php", {
       //   method: "POST",
       //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(form),
+      //   body: JSON.stringify({
+      //     name: form.name,
+      //     email: form.email,
+      //     message: form.message,
+      //   }),
       // });
+      //***next.js */
       // const res = await fetch("/api/contact", {
       //   method: "POST",
       //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(form),
+      //   body: JSON.stringify({
+      //     name: form.name,
+      //     email: form.email,
+      //     message: form.message,
       // });
+      //***express */
       const res = await fetch(
         "https://portfolio-production-7677.up.railway.app/api/contact",
         {
