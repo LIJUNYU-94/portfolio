@@ -745,20 +745,21 @@ h2::before {
   main {
     display: block;
     height: auto;
+    margin-top: 10dvh;
   }
   .sidebar {
-    height: 700px;
+    height: 90dvh;
     transition: transform 0.3s ease-in;
     transform-origin: center;
     border-right: none;
   }
   .leftmid li {
-    margin: 7vh 0 7vh 40%;
+    margin: 4dvh 0 4dvh 40%;
   }
   .leftbottom {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 80px;
+    bottom: 10dvh;
   }
   /***
   contentの部分
