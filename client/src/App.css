@@ -747,7 +747,7 @@ h2::before {
     height: auto;
   }
   .sidebar {
-    height: 85vh;
+    height: 700px;
     transition: transform 0.3s ease-in;
     transform-origin: center;
     border-right: none;
@@ -758,6 +758,7 @@ h2::before {
   .leftbottom {
     left: 50%;
     transform: translateX(-50%);
+    bottom: 80px;
   }
   /***
   contentの部分
