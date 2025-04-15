@@ -35,7 +35,7 @@ app.post("/api/contact", async (req, res) => {
     });
     // ユーザーに送る自動返信メール
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: "no-reply@example.com",
       to: email,
       subject: "【自動返信】お問い合わせありがとうございます",
       html: `<p>${name} 様、</p>
