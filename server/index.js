@@ -22,6 +22,8 @@ app.post("/api/contact", async (req, res) => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    logger: true,
+    debug: true, // これで送信ステータス見える
   });
 
   try {
@@ -30,6 +32,23 @@ app.post("/api/contact", async (req, res) => {
       to: process.env.EMAIL_USER,
       subject: `お問い合わせ from ${name}`,
       text: `メール：${email} 、問い合わせ内容：${message}`,
+    });
+    // ユーザーに送る自動返信メール
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "【自動返信】お問い合わせありがとうございます",
+      html: `<p>${name} 様、</p>
+      <p>この度はお問い合わせいただきありがとうございます。</p>
+      <p>以下の内容で受け付けいたしました。</p>
+      <hr>
+      <p><strong>お名前:</strong> ${name}</p>
+      <p><strong>メールアドレス:</strong> ${email}</p>
+      <p><strong>メッセージ:</strong><br>${message}</p>
+      <hr>
+      <p>内容を確認のうえ、折り返しご連絡させていただきます。</p>
+      <p>どうぞよろしくお願いいたします。</p>
+      <p>※このメールは自動送信です。</p>`,
     });
 
     res.json({ success: true });
