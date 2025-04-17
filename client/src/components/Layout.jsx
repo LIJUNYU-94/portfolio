@@ -113,6 +113,22 @@ function Layout() {
               </AnimatePresence>
             ) : (
               <>
+                {page === "works" && (
+                  <motion.div
+                    key="gitlink"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="gitlink"
+                  >
+                    <p>
+                      Github: <br />
+                      <a href="https://github.com/LIJUNYU-94">
+                        https://github.com/LIJUNYU-94
+                      </a>
+                    </p>
+                  </motion.div>
+                )}
                 <Sidebar setPage={setPage} />
                 <Content page={page} />
               </>

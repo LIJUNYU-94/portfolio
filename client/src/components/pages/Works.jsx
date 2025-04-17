@@ -438,6 +438,10 @@ function Works() {
               <br />
               ご覧いただけましたら嬉しいです。
               <br />
+              Github: <br />
+              <a href="https://github.com/LIJUNYU-94">
+                https://github.com/LIJUNYU-94
+              </a>
             </p>
           ) : (
             <p className="works-message">
