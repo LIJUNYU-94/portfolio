@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useIsMobile from "../isMobile";
 function About() {
@@ -6,7 +6,7 @@ function About() {
   const motionProps = isMobile
     ? { whileInView: { opacity: 1, x: 0 } }
     : { animate: { opacity: 1, x: 0 } };
-
+  const [mode, setMode] = useState("points");
   const intro = [
     "30代を迎える直前で、「人生の道を考え直すのもありかもしれない」と悩んでいました。",
     "高校時代からずっと文系で、語学や歴史が好きだったものの、「何かが違う」という違和感がありました。改めて考えてみると、「歴史が好き」というのは、必ずしも「歴史研究が好き」ということではなかったし、語学も、ただ言語力を活かして働くことに魅力を感じていたわけではありませんでした。",
@@ -21,23 +21,70 @@ function About() {
   return (
     <section>
       <img className="lefttop-img about-img" src="my.jpeg" alt="自分の写真" />
-      <div className="about-message">
-        {intro.map((para, i) => (
-          <p key={i}>
-            {para.split(/(?<=[。])/).map((line, j) => (
-              <motion.span
-                key={j}
-                initial={{ opacity: 0, x: -30 }}
-                {...motionProps}
-                transition={{ delay: j * 0.2 + i * 0.5, duration: 0.3 }}
-                viewport={{ once: true, amount: 1 }}
-              >
-                {line}
-                <br />
-              </motion.span>
-            ))}
+      {mode === "points" && (
+        <div className="about-aboutme">
+          <p className="about-onephrase">
+            一言で自分を表すと：
+            <br className="sp-only" />
+            <span>まっすぐに挑み続ける実行派</span>
           </p>
-        ))}
+          <p className="about-onephrase2">
+            この三つの力をちゃんと意識しながら <br className="sp-only" />
+            成長しています：
+          </p>
+          <div className="about-abilitys">
+            <div className="about-ability">
+              <p>考える力</p>
+              <ul>
+                <li>論理的に物事を整理するのが得意</li>
+                <li>企画立案の経験が豊富</li>
+                <li>企画から実装までを一貫して担当した実績あり</li>
+              </ul>
+            </div>
+            <div className="about-ability">
+              <p>伝える力</p>
+              <ul>
+                <li>家庭教師の経験があり、教えるのが得意</li>
+                <li>チームリーダーとしてメンバーをまとめた経験あり</li>
+                <li>相手に合わせた伝え方や言葉選びを工夫している</li>
+              </ul>
+            </div>
+            <div className="about-ability">
+              <p>作れる力</p>
+              <ul>
+                <li>新しい技術や知識の吸収が早い</li>
+                <li>相手の要望に応じた柔軟なものづくりが得意</li>
+                <li>個人・チーム制作実績が多数</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+      {mode === "article" && (
+        <div className="about-message">
+          {intro.map((para, i) => (
+            <p key={i}>
+              {para.split(/(?<=[。])/).map((line, j) => (
+                <motion.span
+                  key={j}
+                  initial={{ opacity: 0, x: -30 }}
+                  {...motionProps}
+                  transition={{ delay: j * 0.2 + i * 0.5, duration: 0.25 }}
+                  viewport={{ once: true, amount: 1 }}
+                >
+                  {line}
+                  <br />
+                </motion.span>
+              ))}
+            </p>
+          ))}
+        </div>
+      )}
+      <div
+        className="about-switch"
+        onClick={() => setMode(mode === "points" ? "article" : "points")}
+      >
+        {mode === "points" ? <p>マイストーリーへ</p> : <p>戻る</p>}
       </div>
     </section>
   );
