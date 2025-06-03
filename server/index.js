@@ -40,7 +40,7 @@ app.post("/api/contact", async (req, res) => {
       subject: "【自動返信】お問い合わせありがとうございます",
       html: `<p>${name} 様、</p>
       <p>この度はお問い合わせいただきありがとうございます。</p>
-      <p>以下の内容で受け付けいたしました。</p>
+      <p>以下の内容で受け付けいたしました：</p>
       <hr>
       <p><strong>お名前:</strong> ${name}</p>
       <p><strong>メールアドレス:</strong> ${email}</p>
